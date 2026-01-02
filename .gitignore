@@ -73,3 +73,41 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+
+# --- Security Additions ---
+*.env
+*.keystore
+*.p12
+google-services.json
+# --------------------------
+
+
+# --- Advanced Security Additions ---
+# Web/Server configs
+config.php
+web.config
+appsettings.json
+
+# Local developer secrets
+[Dd]ev[Ss]ecrets/
+local.settings.json
+
+# Backup files that might contain old code
+*.bak
+*.old
+*.swp
+# -----------------------------------
+
+
+
+# --- Extra Protection ---
+# Unity auto-generated backups
+*.unitypackage.tmp
+*.asset.tmp
+
+# General sensitive OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+# ------------------------
