@@ -8,10 +8,10 @@ public class Lander : MonoBehaviour
     private void Awake()
     {
       landerRigidBody2D =  GetComponent<Rigidbody2D>();
-        Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(0, 1)));
-        Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(.5f, .5f)));
-        Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(1,0)));
-        Debug.Log(Vector2.Dot(new Vector2(1, 0), new Vector2(-1, 0)));
+        //Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(0, 1)));
+        //Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(.5f, .5f)));
+        //Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(1,0)));
+        //Debug.Log(Vector2.Dot(new Vector2(1, 0), new Vector2(-1, 0)));
     }
 
     private void FixedUpdate()
@@ -44,6 +44,20 @@ public class Lander : MonoBehaviour
             Debug.Log("Landed too hard!");
             return;
         }
+
+
+        float dotVector = Vector2.Dot(Vector2.up, transform.up);
+        Debug.Log(dotVector);
+
+        float minDotVector = .90f;
+        if(dotVector < minDotVector)
+        {
+            //Aterizare cu unghi abrupt
+            Debug.Log("Landed on a too steep angle");
+            return;
+        }
+
+
         Debug.Log("Successful landing!");
     }
 
