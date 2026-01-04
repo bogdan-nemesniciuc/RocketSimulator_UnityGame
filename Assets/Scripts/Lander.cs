@@ -37,9 +37,24 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
+
+        if(!collision2D.gameObject.TryGetComponent(out LandingPad landingPad))
+        {
+            Debug.Log("Crashed on the Terrain!");
+            return;
+        }
+
+        //if(collision2D.gameObject.TryGetComponent(out Terrain terrain))
+        //{
+        //    Debug.Log("Terrain");
+        //}
+
         Debug.Log(collision2D.relativeVelocity.magnitude);
+        //velocity - vector magnitude - the scalar length of the vector
+        //velocityMagnitude - the speed of the gameObject
         float softLandingVelocityMagnitude = 4f;
-        if(collision2D.relativeVelocity.magnitude > softLandingVelocityMagnitude)
+        float relativeVelocityMagnitude = collision2D.relativeVelocity.magnitude;
+        if (relativeVelocityMagnitude > softLandingVelocityMagnitude)
         {
             Debug.Log("Landed too hard!");
             return;
@@ -47,8 +62,10 @@ public class Lander : MonoBehaviour
 
 
         float dotVector = Vector2.Dot(Vector2.up, transform.up);
-        Debug.Log(dotVector);
-
+        Debug.Log("Vectors are pointing in the direction " + dotVector);
+        //vector2.up - (0,1) - the world
+        //tranform.up - the object , the green line 
+        //the angle between them
         float minDotVector = .90f;
         if(dotVector < minDotVector)
         {
@@ -59,6 +76,17 @@ public class Lander : MonoBehaviour
 
 
         Debug.Log("Successful landing!");
+
+        float maxScoreAmountLandingAngle = 100;
+        float scoreDotVectorMultiplier = 10f;
+        float landingAngleScore =maxScoreAmountLandingAngle -  Mathf.Abs(dotVector - 1f) * scoreDotVectorMultiplier * maxScoreAmountLandingAngle ;
+
+        float maxScoreAmountLandingSpeed = 100;
+        float landingSpeedScore = (softLandingVelocityMagnitude - relativeVelocityMagnitude) * maxScoreAmountLandingSpeed;
+
+
+        Debug.Log("landingAngleScore: " + landingAngleScore);
+        Debug.Log("landingSpeedScore: " + landingSpeedScore);
     }
 
 
