@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class Lander : MonoBehaviour
 {
+    public event EventHandler OnUpForce;
+    public event EventHandler OnRightForce;
+    public event EventHandler OnLeftForce;
 
-   private Rigidbody2D landerRigidBody2D;
+
+    public event EventHandler OnBeforeForce;
+
+
+    private Rigidbody2D landerRigidBody2D;
 
     private void Awake()
     {
@@ -15,23 +23,30 @@ public class Lander : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {   //Time.deltaTime - num of seconds since the last frame.
+    {   
+        OnBeforeForce?.Invoke(this , EventArgs.Empty);
+        
+        //Time.deltaTime - num of seconds since the last frame.
         if (Keyboard.current.upArrowKey.isPressed)
         {
             float force = 700f;
             landerRigidBody2D.AddForce(force * transform.up * Time.deltaTime);
+
+            OnUpForce?.Invoke(this, EventArgs.Empty);
         }
 
         if (Keyboard.current.leftArrowKey.isPressed)
         { //torque force - forta de cuplu , o forta de rotatie
             float turnSpeed = +100f;
             landerRigidBody2D.AddTorque(turnSpeed * Time.deltaTime);
+            OnLeftForce?.Invoke(this, EventArgs.Empty);
         }
 
         if (Keyboard.current.rightArrowKey.isPressed)
         {
             float turnSpeed = -100f;
             landerRigidBody2D.AddTorque(turnSpeed * Time.deltaTime);
+            OnRightForce?.Invoke(this, EventArgs.Empty);
         }
     }
 
