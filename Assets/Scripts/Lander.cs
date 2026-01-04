@@ -54,6 +54,7 @@ public class Lander : MonoBehaviour
         //velocityMagnitude - the speed of the gameObject
         float softLandingVelocityMagnitude = 4f;
         float relativeVelocityMagnitude = collision2D.relativeVelocity.magnitude;
+        
         if (relativeVelocityMagnitude > softLandingVelocityMagnitude)
         {
             Debug.Log("Landed too hard!");
@@ -87,6 +88,11 @@ public class Lander : MonoBehaviour
 
         Debug.Log("landingAngleScore: " + landingAngleScore);
         Debug.Log("landingSpeedScore: " + landingSpeedScore);
+
+        int score = Mathf.RoundToInt ( (landingAngleScore + landingSpeedScore) * landingPad.GetScoreMultiplier() );
+
+        Debug.Log("score: " + score);
+
     }
 
 
