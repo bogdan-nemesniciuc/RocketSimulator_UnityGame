@@ -1,6 +1,8 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 public class Lander : MonoBehaviour
 {
 
@@ -27,10 +29,13 @@ public class Lander : MonoBehaviour
 
 
     private Rigidbody2D landerRigidBody2D;
-    private float fuelAmount = 10f;
+    private float fuelAmount ;
+    private float fuelAmountMax = 10f;
+
 
     private void Awake()
     {
+        fuelAmount = fuelAmountMax;
         Instace = this;
       landerRigidBody2D =  GetComponent<Rigidbody2D>();
         //Debug.Log(Vector2.Dot(new Vector2(0, 1), new Vector2(0, 1)));
@@ -153,6 +158,12 @@ public class Lander : MonoBehaviour
         {
             float addFuelAmount = 10f;
             fuelAmount += addFuelAmount;
+
+            if(fuelAmount> fuelAmountMax)
+            {
+                fuelAmount = fuelAmountMax;
+            }
+
             fuelPickup.DestroySelf();
         }
         if (collider2D.gameObject.TryGetComponent(out CoinPickup coinPickup))
@@ -169,4 +180,23 @@ public class Lander : MonoBehaviour
     }
 
 
+    public float GetSpeedX()
+    {
+        return landerRigidBody2D.linearVelocityX;
+    }
+
+    public float GetSpeedY()
+    {
+        return landerRigidBody2D.linearVelocityY;
+    }
+
+    public float GetFuel()
+    {
+        return fuelAmount;
+    }
+
+    public float GetFuelAmountNormalized()
+    {
+        return fuelAmount / fuelAmountMax;
+    }
 }
