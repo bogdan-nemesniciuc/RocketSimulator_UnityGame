@@ -19,7 +19,7 @@ public class LanderVisuals : MonoBehaviour
         SetEnabledThrusterParticleSystem(rightThrusterParticleSystem, false);
         SetEnabledThrusterParticleSystem(middleThrusterParticleSystem, false);
     }
-
+    
     private void Start()
     {
         lander.OnLanded += Lander_OnLanded;
