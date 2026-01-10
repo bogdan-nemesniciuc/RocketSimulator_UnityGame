@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "534dc5f6-43a3-4b44-a57b-5affed580fbb",
+            "actions": [
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "3b8c18f0-fe25-403c-969d-8f8dd4bcc48c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "050e0244-ba54-40c7-b5c7-81ae24a24725",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
